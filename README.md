@@ -6,6 +6,17 @@ be used to create textures procedurally and paint 3D models.
 Its user interface is based on Godot's GraphEdit node: textures and brushes are
 described as interconnected nodes.
 
+## About this mod
+
+This mod is designed for very low end PCs.
+
+This brach is modified and will render with lower resolution. 
+You can use the Extra menu to control how much lower resolution you want.
+
+Tested on Godot 3.5.3.
+
+Compile and use the same assets than Material Maker 1.3 (the ones in the repo won't work).
+
 ## Download
 
 - **[Download on itch.io](https://rodzilla.itch.io/material-maker)**
