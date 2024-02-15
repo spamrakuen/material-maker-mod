@@ -72,6 +72,9 @@ func get_image_size() -> int:
 		rv = int(pow(2, parameters.size))
 	else:
 		rv = int(pow(2, TEXTURE_SIZE_DEFAULT))
+		
+	rv = rv >> mm_globals_custom.global_scale
+		
 	return rv
 
 func update_preview() -> void:

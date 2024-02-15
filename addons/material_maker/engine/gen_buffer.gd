@@ -21,6 +21,10 @@ var is_paused : bool = false
 
 var current_renderer = null
 
+func get_buffer_size():
+	var buff_size = int(pow(2, get_parameter("size")))
+	buff_size = buff_size >> mm_globals_custom.global_scale
+	return buff_size
 
 func _ready() -> void:
 	material = ShaderMaterial.new()
@@ -119,7 +123,7 @@ func on_dep_update_buffer(buffer_name : String) -> bool:
 	while current_renderer is GDScriptFunctionState:
 		current_renderer = yield(current_renderer, "completed")
 	var time = OS.get_ticks_msec()
-	current_renderer = current_renderer.render_material(self, material, pow(2, get_parameter("size")))
+	current_renderer = current_renderer.render_material(self, material, get_buffer_size())
 	while current_renderer is GDScriptFunctionState:
 		current_renderer = yield(current_renderer, "completed")
 	current_renderer.copy_to_texture(texture)
@@ -140,7 +144,7 @@ func on_dep_update_buffer(buffer_name : String) -> bool:
 	return true
 
 func get_globals(texture_name : String) -> Array:
-	var texture_globals : String = "uniform sampler2D %s;\nuniform float %s_size = %d.0;\n" % [ texture_name, texture_name, pow(2, get_parameter("size")) ]
+	var texture_globals : String = "uniform sampler2D %s;\nuniform float %s_size = %d.0;\n" % [ texture_name, texture_name, get_buffer_size() ]
 	return [ texture_globals ]
 
 func _get_shader_code(uv : String, output_index : int, context : MMGenContext) -> Dictionary:

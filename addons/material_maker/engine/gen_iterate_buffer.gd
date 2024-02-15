@@ -21,6 +21,11 @@ var iteration_param_name : String
 var used_named_parameters : Array = []
 var pending_textures = [[], []]
 
+func get_buffer_size():
+	var buff_size = int(pow(2, get_parameter("size")))
+	buff_size = buff_size >> mm_globals_custom.global_scale
+	return buff_size
+
 func _init():
 	texture.flags = Texture.FLAG_REPEAT
 	material = ShaderMaterial.new()
@@ -174,7 +179,7 @@ func on_dep_update_buffer(buffer_name : String) -> bool:
 		mm_deps.dependency_update(buffer_name, texture, true)
 		return false
 	var time = OS.get_ticks_msec()
-	var size = pow(2, get_parameter("size"))
+	var size = get_buffer_size()
 	if get_parameter("shrink"):
 		size = int(size)
 		size >>= current_iteration
@@ -214,7 +219,7 @@ func set_current_iteration(i : int) -> void:
 		mm_deps.buffer_invalidate(buffer_names[3])
 
 func get_globals(texture_name : String) -> Array:
-	var texture_globals : String = "uniform sampler2D %s;\nuniform float o%d_tex_size = %d.0;\nuniform float o%d_iteration = 0.0;\n" % [ texture_name, get_instance_id() 	, pow(2, get_parameter("size")), get_instance_id() ]
+	var texture_globals : String = "uniform sampler2D %s;\nuniform float o%d_tex_size = %d.0;\nuniform float o%d_iteration = 0.0;\n" % [ texture_name, get_instance_id() 	, get_buffer_size(), get_instance_id() ]
 	return [ texture_globals ]
 
 func _get_shader_code(uv : String, output_index : int, context : MMGenContext) -> Dictionary:

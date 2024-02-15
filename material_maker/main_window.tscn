@@ -294,9 +294,6 @@ margin_right = 331.0
 margin_bottom = -13.0
 mouse_filter = 2
 custom_constants/separation = 7
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Preview2DButton" type="Button" parent="VBoxContainer/Layout/SplitRight/ProjectsPanel/PreviewUI"]
 margin_right = 44.0

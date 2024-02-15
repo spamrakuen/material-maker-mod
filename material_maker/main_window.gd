@@ -109,9 +109,37 @@ const MENU = [
 	{ menu="Help/Show selected library item documentation", command="show_library_item_doc", shortcut="Control+F1" },
 	{ menu="Help/Report a bug", command="bug_report" },
 	{ menu="Help/" },
-	{ menu="Help/About", command="about" }
+	{ menu="Help/About", command="about" },
+	
+	{ menu="Extra/Scale 1.0", command="scale_by_1_0" },
+	{ menu="Extra/Scale 0.5", command="scale_by_0_5" },
+	{ menu="Extra/Scale 0.25", command="scale_by_0_25" },
+	{ menu="Extra/Scale 0.125", command="scale_by_0_125" }
 ]
 
+func refresh():
+	var project = get_current_project()
+	if project == null:
+		return
+	var material_node = project.get_material_node()
+	if material_node:
+		material_node.update()
+
+func scale_by_1_0():
+	mm_globals_custom.global_scale = 0
+	refresh()
+	
+func scale_by_0_5():
+	mm_globals_custom.global_scale = 1	
+	refresh()
+	
+func scale_by_0_25():
+	mm_globals_custom.global_scale = 2	
+	refresh()
+	
+func scale_by_0_125():
+	mm_globals_custom.global_scale = 3		
+	refresh()
 
 func _enter_tree() -> void:
 	mm_globals.main_window = self

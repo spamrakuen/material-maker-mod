@@ -239,6 +239,7 @@ mm_renderer="*res://addons/material_maker/engine/multi_renderer.gd"
 mm_sdf_builder="*res://addons/material_maker/sdf_builder/sdf_builder.tscn"
 mm_preprocessor="*res://addons/material_maker/engine/preprocessor.gd"
 Html5="*res://material_maker/html5.gd"
+mm_globals_custom="*res://material_maker/globals_custom.gd"
 
 [debug]
 
